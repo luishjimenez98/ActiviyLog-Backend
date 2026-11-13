@@ -26,7 +26,14 @@ export const login = async (req, res) => {
     return res.status(500).json({
       origen: 'BASE_DE_DATOS',
       error: dbError.message,
-      code: dbError.code // Ej: ECONNREFUSED, ER_ACCESS_DENIED_ERROR, ER_NO_SUCH_TABLE
+      code: dbError.code,
+      configLeida: {
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        database: process.env.DB_NAME,
+        port: process.env.DB_PORT,
+        tienePassword: Boolean(process.env.DB_PASSWORD)
+  }
     });
   }
 
